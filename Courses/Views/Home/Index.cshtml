@@ -5,11 +5,29 @@
 }
 
 
-
 <div class="jumbotron">
     <h2>Welcome</h2>
     <p class="lead">Udemy is where learners come to learn the skills they need.Discover thousands of free courses. </p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<div id="courseDetailsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="courseTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <img id="courseImage" class="thumbnail" style="height:128px; width:128px;" />
+                <p id="courseContent"></p>
+                <p><strong>Date:</strong> <span id="courseDate"></span></p>
+                <p><strong>Duration:</strong> <span id="courseDuration"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 @foreach (var item in Model)
 {
@@ -24,21 +42,40 @@
                     <img src="~/Uploads/@subItem.CourseImage" class="thumbnail" style="height:128px; width:128px;" />
                     <h3 style="text-align:center">@Html.DisplayFor(modelItem => subItem.CourseTitle)</h3>
                     <h5>@Html.DisplayFor(modelItem => subItem.CourseContent)</h5>
-                    <button class="btn-btn-default details-button" data-description="@Html.DisplayFor(modelItem => subItem.CourseContent)">Details</button>
-                    <div class="course-description" style="display:none;">
-                        @Html.DisplayFor(modelItem => subItem.CourseContent)
-                    </div>
+                     <button class="btn btn-default details-button"
+                                data-course-title="@Html.DisplayFor(modelItem => subItem.CourseTitle)"
+                                data-course-content="@Html.DisplayFor(modelItem => subItem.CourseContent)"
+                                data-course-date="@subItem.CourseDate.ToString("MM/dd/yyyy")"
+                                data-course-duration="@Html.DisplayFor(modelItem => subItem.CourseDuration)"
+                                data-course-image="~/Uploads/@subItem.CourseImage">Details</button>
+                        <input type="hidden" class="course-image-path" value="~/Uploads/@subItem.CourseImage" />
+                     
+                   
                 </div>
             }
         </div>
     </div>
-}
 
-@section scripts{ <script>
+}
+<!-- Include jQuery from a CDN -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
     $(document).ready(function () {
-        $('.details-button').click(function () {
-            var description = $(this).data('description');
-            $(this).siblings('.course-description').toggle();
+        $('.details-button').on('click', function () {
+            var courseTitle = $(this).data('course-title');
+            var courseContent = $(this).data('course-content');
+            var courseDate = $(this).data('course-date');
+            var courseDuration = $(this).data('course-duration');
+            var courseImagePath = $(this).closest('.panel').find('.course-image-path').val();
+
+            $('#courseTitle').text(courseTitle);
+            $('#courseContent').text(courseContent);
+            $('#courseDate').text(courseDate);
+            $('#courseDuration').text(courseDuration);
+            $('#courseImage').attr('src', courseImagePath);
+
+            $('#courseDetailsModal').modal('show');
         });
     });
-</script>}
+</script>
+

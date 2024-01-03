@@ -3,7 +3,7 @@
     padding-top:150px;
 }
 .navbar-default {
-    background-color: #2a6598;
+    background-color: #b14a10;
     border-color: #e7e7e7;
 }
 .navbar-default .navbar-nav > li > a {
@@ -28,13 +28,18 @@
     text-align:justify;
     padding:10px;
 }
-.subfooter{
-    background-color:#2a6598;
-    color:white;
-    text-align:center;
-    padding:10px;
+.subfooter {
+    background-color: #b14a10;
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
 myfooter p,h3,ul{
     margin-left:10px;
     margin-bottom:20px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #b14a10;
+    border-color: #277d0e;
 }
