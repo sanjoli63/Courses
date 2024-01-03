@@ -1,0 +1,35 @@
+﻿@model Courses.Models.Fields
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Field</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Fields list", "Index")
+</p>

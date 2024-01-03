@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Courses.Models.Fields>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="jumbotron">
+    <h2>Welcome</h2>
+    <p class="lead">Udemy is where learners come to learn the skills they need.Discover thousands of free courses. </p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+@foreach (var item in Model)
+{
+    <div class="panel panel-default" style="padding:15px;">
+        <h1 class="panel-heading">@Html.DisplayFor(modelItem => item.FieldName)</h1>
+
+
+        <div class="row">
+            @foreach (var subItem in item.Course)
+            {
+                <div class="col-md-3 thumbnail" style="height:300px; margin-left:20px;margin-bottom:30px;">
+                    <img src="~/Uploads/@subItem.CourseImage" class="thumbnail" style="height:128px; width:128px;" />
+                    <h3 style="text-align:center">@Html.DisplayFor(modelItem => subItem.CourseTitle)</h3>
+                    <h5>@Html.DisplayFor(modelItem => subItem.CourseContent)</h5>
+                    <button class="btn-btn-default details-button" data-description="@Html.DisplayFor(modelItem => subItem.CourseContent)">Details</button>
+                    <div class="course-description" style="display:none;">
+                        @Html.DisplayFor(modelItem => subItem.CourseContent)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@section scripts{ <script>
+    $(document).ready(function () {
+        $('.details-button').click(function () {
+            var description = $(this).data('description');
+            $(this).siblings('.course-description').toggle();
+        });
+    });
+</script>}
